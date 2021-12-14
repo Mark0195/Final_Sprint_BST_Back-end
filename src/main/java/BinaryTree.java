@@ -1,57 +1,103 @@
-import org.w3c.dom.Node;
-
 public class BinaryTree {
-    private int info;
-    private Node left;
-    private Node right;
 
-    public static class Binary {
-        int info;
+    public static class Node {
+        int data;
         Node left;
         Node right;
-    }
 
-    public void Binary(int info){
-        this.info = info;
-        this.left = null;
-        this.right = null;
+        public Node(int data) {
+            this.data = data;
+            this.left = null;
+            this.right = null;
+        }
     }
 
     public Node root;
 
-    public BinaryTree(){
+    public BinaryTree() {
         root = null;
     }
 
-    public void inserted(int info){
-        root = insertRec(root, info);
+    public void insert(int data) {
+        Node newNode = new Node(data);
+        if (root == null) {
+            root = newNode;
+            return;
+        } else {
+            Node current = root, parent = null;
+
+            while (true) {
+                parent = current;
+                if (data < current.data) {
+                    current = current.left;
+                    if (current == null) {
+                        parent.left = newNode;
+                        return;
+                    }
+                }
+
+                else {
+                    current = current.right;
+                    if (current == null) {
+                        parent.right = newNode;
+                        return;
+                    }
+                }
+            }
+        }
     }
 
-    private Node insertRec(Node root, int info) {
-        if (root == null)
-        {
-            root = new Node(info);
+    public Node minNode(Node root) {
+        if (root.left != null)
+            return minNode(root.left);
+        else
             return root;
-        }
-        if (info < root.info)
-            this.left = insertRec(root.left, info);
-        else if (info > root.info)
-            this.right = insertRec(root.right, info);
-
-        return root;
-    }
-    public void inOrder()
-    {
-        inOrderRec(root);
-    }
-    private void inOrderRec(Node root)
-    {
-        if (root != null) {
-            inOrderRec(root.left);
-            System.out.println(root.info);
-            inOrderRec(root.right);
-        }
     }
 
+    public Node deleteNode(Node node, int value) {
+        if (node == null) {
+            return null;
+        } else {
+            if (value < node.data)
+                node.left = deleteNode(node.left, value);
+
+            else if (value > node.data)
+                node.right = deleteNode(node.right, value);
+
+            else {
+                if (node.left == null && node.right == null)
+                    node = null;
+
+                else if (node.left == null) {
+                    node = node.right;
+                }
+
+                else if (node.right == null) {
+                    node = node.left;
+                }
+
+                else {
+                    Node temp = minNode(node.right);
+                    node.data = temp.data;
+                    node.right = deleteNode(node.right, temp.data);
+                }
+            }
+            return node;
+        }
+    }
+
+    public void inorderTraversal(Node node) {
+
+        if (root == null) {
+            System.out.println("Tree is empty");
+            return;
+
+        } else {
+            if (node.left != null)
+                inorderTraversal(node.left);
+            System.out.print(node.data + " ");
+            if (node.right != null)
+                inorderTraversal(node.right);
+        }
+    }
 }
-

@@ -1,14 +1,16 @@
 
 public class BinaryTreeDriver {
-    public static void main(String[] args){
-        BinaryTree tree = new BinaryTree();
-        tree.inserted(5);
-        tree.inserted(3);
-        tree.inserted(2);
-        tree.inserted(4);
-        tree.inserted(7);
-        tree.inserted(6);
-        tree.inserted(8);
-        tree.inOrder();
+    public static void main(String[] args) {
+        BinaryTree bt = new BinaryTree();
+        bt.insert(4);
+        bt.insert(2);
+        bt.insert(7);
+        bt.insert(8);
+        bt.insert(6);
+        bt.insert(3);
+
+        System.out.println("Binary search tree after insertion:");
+        bt.inorderTraversal(bt.root);
+
     }
 }
