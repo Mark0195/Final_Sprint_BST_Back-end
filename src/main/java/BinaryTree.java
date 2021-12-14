@@ -89,7 +89,7 @@ public class BinaryTree {
     public void inorderTraversal(Node node) {
 
         if (root == null) {
-            System.out.println("Tree is empty");
+            System.out.println("Tree is empty!");
             return;
 
         } else {
