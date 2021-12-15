@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class BController {
-    @GetMapping(path = "/numbers")
-    public String getNumbers() {
-        return "numbers.html";
+    @GetMapping(path = "/main")
+    public String getMain() {
+        return "main.html";
     }
 }
