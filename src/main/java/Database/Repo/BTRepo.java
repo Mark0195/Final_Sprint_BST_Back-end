@@ -8,4 +8,6 @@ import java.util.List;
 
 @RepositoryRestResource(collectionResourceRel = "BST", path = "BST")
 public interface BTRepo extends PagingAndSortingRepository<BST, Long> {
+    List<BST> findById(@Param("id") long id);
+    List<BST> findByInput(@Param("input") String input);
 }
